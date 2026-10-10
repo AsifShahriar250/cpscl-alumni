@@ -1,26 +1,9 @@
-import cors from "cors";
-import dotenv from "dotenv";
-import express from "express";
-import helmet from "helmet";
 
-dotenv.config();
+import app from "./app.js";
+import { env } from "./config/env.js";
 
-const app = express();
-
-const PORT = Number(process.env.PORT) || 4000;
-
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
-
-app.get("/", (_req, res) => {
-  res.json({
-    success: true,
-    message: "CPSCL Alumni Platform API is running",
-  });
+app.listen(env.port, () => {
+  console.log(
+    `Server running at http://localhost:${env.port} (${env.nodeEnv})`,
+  );
 });
-
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
-
